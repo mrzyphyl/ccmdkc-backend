@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const userSchema = mongoose.Schema({
+const adminSchema = mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Please add your Name']
@@ -21,4 +21,4 @@ const userSchema = mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model('Admin', userSchema)
+module.exports = mongoose.model('Admin', adminSchema)
