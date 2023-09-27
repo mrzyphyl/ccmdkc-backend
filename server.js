@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/api/user', require('./routes/UserRouter'))
 app.use('/api/admin', require('./routes/AdminRouter'))
 app.use('/api/appointments', require('./routes/AppointmentsRouter'))
+app.use('/api/records', require('./routes/PatientRecords'))
 
 app.use(errorHandler)
 
