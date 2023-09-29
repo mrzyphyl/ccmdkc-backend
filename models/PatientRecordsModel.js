@@ -26,7 +26,7 @@ const medicalHistorySchema = mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        default: new Date().getTime()
+        default: Date.now
     }
 });
 
