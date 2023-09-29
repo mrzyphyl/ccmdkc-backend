@@ -185,7 +185,7 @@ const deltMultiUser = asyncHandler (async (req, res) => {
         throw new Error('User no found')
     }
 
-    await User.deleteMany()
+    await user.deleteMany()
 
     res.status(200).json({ id: req.params.id})
 })

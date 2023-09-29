@@ -17,7 +17,7 @@ const getOneAppointment = asyncHandler (async (req, res) => {
 
     if(!appointment){
         res.status(400)
-        throw new Error('Appointment no found')
+        throw new Error('Appointment not found')
     }
     
     res.status(200).json(appointment)
@@ -100,16 +100,16 @@ const checkAppointment = asyncHandler (async (req, res) => {
 const updateAppointment = asyncHandler (async (req, res) => {
     const appointment = await Appointments.findById(req.params.id)
 
-    if(!user){
+    if(!appointment){
         res.status(400)
-        throw new Error('User no found')
+        throw new Error('Appointment not found')
     }
 
-    const updatedUser = await Appointments.findByIdAndUpdate(req.params.id, req.body, {
+    const updatedAppointment = await Appointments.findByIdAndUpdate(req.params.id, req.body, {
         new: true
     })
     
-    res.status(200).json(updatedUser)
+    res.status(200).json(updatedAppointment)
 })
 
 
@@ -117,14 +117,14 @@ const updateAppointment = asyncHandler (async (req, res) => {
 //@route DELETE /api/appointment/:id
 //@access Public
 const deltAppointment = asyncHandler (async (req, res) => {
-    const user = await Appointments.findById(req.params.id)
+    const appointment = await Appointments.findById(req.params.id)
 
-    if(!user){
+    if(!appointment){
         res.status(400)
-        throw new Error('User no found')
+        throw new Error('Appointment not found')
     }
 
-    await user.deleteOne()
+    await appointment.deleteOne()
 
     res.status(200).json({ id: req.params.id})
 })
@@ -134,14 +134,14 @@ const deltAppointment = asyncHandler (async (req, res) => {
 //@route DELETE /api/appointment/:ids
 //@access Public
 const deltMultiAppointment = asyncHandler (async (req, res) => {
-    const user = await Appointments.findById(req.params.id)
+    const appointment = await Appointments.findById(req.params.id)
 
-    if(!user){
+    if(!appointment){
         res.status(400)
-        throw new Error('User no found')
+        throw new Error('Appointment not found')
     }
 
-    await User.deleteMany()
+    await appointment.deleteMany()
 
     res.status(200).json({ id: req.params.id})
 })
