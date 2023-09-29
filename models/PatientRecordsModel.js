@@ -1,5 +1,35 @@
 const mongoose = require('mongoose')
 
+const medicalHistorySchema = mongoose.Schema({
+    medicalId: {
+        type: mongoose.Schema.Types.ObjectId
+    },
+    allergies: {
+        type: String,
+        required: [true, 'Please add a Value']
+    },
+    diagnosis: {
+        type: String,
+        required: [true, 'Please add a Value']
+    },
+    bloodPressure: {
+        type: String,
+        required: [true, 'Please add a Value']
+    },
+    temperature: {
+        type: String,
+        required: [true, 'Please add a Value']
+    },
+    surgeries: {
+        type: String,
+        required: [true, 'Please add a Value']
+    },
+    createdAt: {
+        type: Date,
+        default: new Date().getTime()
+    }
+});
+
 const patientRecordSchema = mongoose.Schema({
     patientName: {
         type: String,
@@ -21,38 +51,9 @@ const patientRecordSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add a Value']
     },
-    medicalHistory: [{
-        medicalId: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true
-        },
-        allergies: {
-            type: String,
-            required: [true, 'Please add a Value']
-        },
-        diagnosis: {
-            type: String,
-            required: [true, 'Please add a Value']
-        },
-        bloodPressure: {
-            type: String,
-            required: [true, 'Please add a Value']
-        },
-        temperature: {
-            type: String,
-            required: [true, 'Please add a Value']
-        },
-        surgeries: {
-            type: String,
-            required: [true, 'Please add a Value']
-        },
-        createdAt: {
-            type: Date,
-            default: new Date().getTime()
-        }
-    }]
+    medicalHistory: [medicalHistorySchema]
 }, {
     timestamps: true
-})
+});
 
-module.exports = mongoose.model('PatientRecord', patientRecordSchema)
+module.exports = mongoose.model('PatientRecord', patientRecordSchema);

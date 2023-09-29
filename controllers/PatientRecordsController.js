@@ -19,7 +19,7 @@ const getOneRecord = asyncHandler (async (req, res) => {
 
     if(!record){
         res.status(400)
-        throw new Error('User no found')
+        throw new Error('No Records found')
     }
     
     res.status(200).json(record)
@@ -92,7 +92,7 @@ const updateRecords = asyncHandler (async (req, res) => {
 
     if(!record){
         res.status(400)
-        throw new Error('Record not found')
+        throw new Error('No Records found')
     }
 
     const updatedRecord = await professorUser.findByIdAndUpdate(req.params.id, req.body, {
@@ -111,7 +111,7 @@ const deltRecord = asyncHandler (async (req, res) => {
 
     if(!record){
         res.status(400)
-        throw new Error('Record not found')
+        throw new Error('No Records found')
     }
 
     await profUser.deleteOne()
