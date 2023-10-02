@@ -3,15 +3,15 @@ const mongoose = require('mongoose')
 const inventorySchema = mongoose.Schema({
     itemName: {
         type: String,
-        required: [true, 'Please add your Name']
+        required: [true, 'Please a value']
     },
     itemDescription: {
         type: String,
-        required: [true, 'Please add your Birthday']
+        required: [true, 'Please a value']
     },
     stocksAvailable: {
         type: String,
-        required: [true, 'Please add your Sex']
+        required: [true, 'Please a value']
     },
 }, {
     timestamps: true

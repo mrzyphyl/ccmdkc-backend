@@ -5,14 +5,18 @@ const appointmentSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add your Name']
     },
-    appointmentTicketNo: {
+    appointmentDate: {
         type: String,
         required: [true, 'Please add your Ticket Number']
+    },
+    appointmentType: {
+        type: String,
+        required: [true, 'Please add your Appointment']
     },
     appointmentTime: {
         type: String,
         required: [true, 'Please add Time Slot']
-    }
+    },
 }, {
     timestamps: true
 })

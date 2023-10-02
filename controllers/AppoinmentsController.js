@@ -38,7 +38,8 @@ const getMultiAppointments = asyncHandler (async (req, res) => {
 const postAppointment = asyncHandler (async (req, res) => {
     const { 
         name,
-        appointmentTicketNo,
+        appointmentDate,
+        appointmentType,
         appointmentTime
      } = req.body
 
@@ -48,16 +49,17 @@ const postAppointment = asyncHandler (async (req, res) => {
     }
 
     //Check if Appointment exist
-    const appointmentExist = await Appointments.findOne({appointmentTime})
+    const appointmentExist = await Appointments.findOne({appointmentTime, appointmentDate})
 
     if(appointmentExist){
         res.status(400)
-        throw new Error('Timeslot already in use')
+        throw new Error('Appointment in that timeslot already in use')
     }
 
     const appointment = await Appointments.create({
         name,
-        appointmentTicketNo,
+        appointmentDate,
+        appointmentType,
         appointmentTime
     })
 
@@ -65,7 +67,8 @@ const postAppointment = asyncHandler (async (req, res) => {
         res.status(201).json({
             _id: appointment.id,
             name: appointment.name,
-            appointmentTicketNo: appointment.appointmentTicketNo,
+            appointmentDate: appointment.appointmentDate,
+            appointmentType: appointment.appointmentType,
             appointmentTime: appointment.appointmentTime
         })
     } else {
@@ -78,7 +81,7 @@ const postAppointment = asyncHandler (async (req, res) => {
 //@route POST /api/appointment/check
 //@access Public
 const checkAppointment = asyncHandler (async (req, res) => {
-    let { appointmentTime } = req.body
+    let { appointmentTime, appointmentDate } = req.body
 
     if(!appointmentTime){
         res.status(400)
@@ -86,7 +89,7 @@ const checkAppointment = asyncHandler (async (req, res) => {
     }
 
     //Check if Timeslot is available
-    const isAvailable = await Appointments.findOne({appointmentTime})
+    const isAvailable = await Appointments.findOne({appointmentTime, appointmentDate})
     if(isAvailable){
         res.status(400)
         throw new Error('Timeslot already in use')
