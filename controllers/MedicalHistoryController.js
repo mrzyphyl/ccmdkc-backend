@@ -1,6 +1,26 @@
 const asyncHandler = require('express-async-handler')
 const Records = require('../models/PatientRecordsModel')
 
+// Get All Data for One Patient Record
+// @route GET /api/records/medical-history/:id
+// @access Public
+const getAllMedical = asyncHandler(async (req, res) => {
+    try {
+        // Find the patient record by ID
+        const record = await Records.findById(req.params.id);
+
+        if (!record) {
+            res.status(404).json({ error: 'Record not found' });
+            return;
+        }
+
+        const medicalData = record.medicalHistory || [];
+
+        res.status(200).json(medicalData);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+})
 
 //Add Medical History
 //@route PUT /api/user/:id/medical-history
@@ -84,7 +104,7 @@ const editMedicalHistory = asyncHandler (async (req, res) => {
 
 
 //Get One Medical History
-//@route GET /api/records/medical-history/:id
+//@route GET /api/records/getmedical/:id
 //@access Public
 const getOneMedicalHistory = asyncHandler (async (req, res) => {
     // Find the patient record by ID
@@ -153,5 +173,6 @@ module.exports = {
     addMedicalHistory,
     editMedicalHistory,
     getOneMedicalHistory,
-    deleteMedicalHistory
+    deleteMedicalHistory,
+    getAllMedical
 }
